@@ -1,0 +1,27 @@
+# deployment-postgresql.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15   # Specify your desired PostgreSQL version
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: ecommerce      # Replace with your desired username
+        - name: POSTGRES_PASSWORD
+          value: Pg1234  # Replace with your desired password
+        - name: POSTGRES_DB
+          value: ecommerce  # Replace with your desired database name
