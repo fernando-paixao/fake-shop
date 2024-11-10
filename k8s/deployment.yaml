@@ -15,7 +15,7 @@ spec:
         app: shop-app
     spec:
       containers:
-      - name: python-container
+      - name: shop-app
         image: nikopolides/fake-shop
         ports:
         - containerPort: 5000
