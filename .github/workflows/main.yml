@@ -60,9 +60,9 @@ jobs:
         uses: Azure/k8s-deploy@v5
         with:
           manifests: |
-            - ./k8s/deployment.yaml
+            ./k8s/deployment.yaml
           images: |
-            - $DOCKER_IMAGE:${{ github.run_number }}
+            $DOCKER_IMAGE:${{ github.run_number }}
         #run: |
         #  kubectl set image -f  k8s/deployment.yml my-app=$DOCKER_IMAGE:${{ github.run_number }}
         #  kubectl apply -f k8s/deployment.yml
