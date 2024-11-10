@@ -56,13 +56,16 @@ jobs:
         run: |
           aws eks update-kubeconfig --name eks-aula
 
+      # Was not changing tag version, just putting latest...
+      #- name: Deploy to EKS
+      #  uses: Azure/k8s-deploy@v5
+      #  with:
+      #    manifests: |
+      #      ./k8s/deployment.yaml
+      #    images: |
+      #      $DOCKER_IMAGE:${{ github.run_number }}
+
       - name: Deploy to EKS
-        uses: Azure/k8s-deploy@v5
-        with:
-          manifests: |
-            ./k8s/deployment.yaml
-          images: |
-            $DOCKER_IMAGE:${{ github.run_number }}
-        #run: |
-        #  kubectl set image -f  k8s/deployment.yml my-app=$DOCKER_IMAGE:${{ github.run_number }}
-        #  kubectl apply -f k8s/deployment.yml
+        run: |
+          kubectl apply -f k8s/deployment.yaml  
+          kubectl set image -f k8s/deployment.yaml shop-app=$DOCKER_IMAGE:${{ github.run_number }}
