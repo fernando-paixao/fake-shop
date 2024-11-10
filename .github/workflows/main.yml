@@ -57,6 +57,12 @@ jobs:
           aws eks update-kubeconfig --name eks-aula
 
       - name: Deploy to EKS
-        run: |
-          kubectl set image -f deployment.yml my-app=$DOCKER_IMAGE:${{ github.run_number }}
-          kubectl apply -f deployment.yml
+        uses: Azure/k8s-deploy@v5
+        with:
+          manifests: |
+            - ./k8s/deployment.yml
+          images: |
+            - $DOCKER_IMAGE:${{ github.run_number }}
+        #run: |
+        #  kubectl set image -f  k8s/deployment.yml my-app=$DOCKER_IMAGE:${{ github.run_number }}
+        #  kubectl apply -f k8s/deployment.yml
