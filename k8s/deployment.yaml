@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: python-container
-        image: WILL_I_BE_REPLACED
+        image: nikopolides/fake-shop
         ports:
         - containerPort: 5000
         env:
